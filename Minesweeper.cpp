@@ -270,9 +270,7 @@ bool Minesweeper::isInsideBoard(int row, int column) const {
 }
 
 bool Minesweeper::isValidSelection(int row, int column) const {
-    return isInsideBoard(row, column) &&
-           !board[row][column].isRevealed() &&
-           !board[row][column].isFlagged();
+    return isInsideBoard(row, column) && !board[row][column].isRevealed() && !board[row][column].isFlagged();
 }
 
 bool Minesweeper::isSafeCell(int row, int column) const {
@@ -300,7 +298,7 @@ void Minesweeper::calculateNumbers() {
         }
     }
 }
-
+    
 // Reveal and flood-fill logic
 void Minesweeper::revealCell(int row, int column) {
     if (!isValidSelection(row, column)) return;
@@ -543,10 +541,6 @@ void Minesweeper::play() {
                     pos++;
                 }
             }
-
-            // Anything left after the second number is a bad input
-            while (pos < line.size() && line[pos] == ' ') pos++;
-            if (pos < line.size()) valid = false;
 
             if (!valid) cout << "Use the format: reveal x,y or flag x,y\n";
             else if (command == "reveal" || command == "r") processSelection(numbers[0] - 1, numbers[1] - 1);
